@@ -35,6 +35,8 @@ pipeline {
     // }
 
 
+
+
     stage('Update Image Tag in GitOps') {
       steps {
          checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:udemy-dev-withK8s-AWS-codedecode/deployment-folder.git']])
