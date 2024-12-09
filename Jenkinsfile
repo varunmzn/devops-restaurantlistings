@@ -19,6 +19,7 @@ pipeline {
         sh 'ls'
         }
     }
+    
 
     //   stage('Docker Build and Push') {
     //   steps {
