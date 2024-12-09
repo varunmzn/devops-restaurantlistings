@@ -18,8 +18,8 @@ pipeline {
         steps{
           // sh 'ssh-agent -k'
           // sh 'eval "$(ssh-agent -s)"'
-          sh 'exec ssh-agent bash'
-          sh 'ssh-add ../.ssh/id_rsa'
+          // sh 'exec ssh-agent bash'
+          // sh 'ssh-add ../.ssh/id_rsa'
         }
     }
 
