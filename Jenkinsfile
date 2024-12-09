@@ -16,8 +16,10 @@ pipeline {
 
     stage('Maven Build'){
         steps{
-        sh 'eval "$(ssh-agent -s)"'
-        sh 'ssh-add ~/.ssh/id_rsa'
+          sh 'ssh-agent -k'
+          sh 'eval "$(ssh-agent -s)"'
+          sh 'exec ssh-agent bash'
+          sh 'ssh-add ~/.ssh/id_rsa'
         }
     }
 
