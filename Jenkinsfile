@@ -14,14 +14,16 @@ pipeline {
 
   stages {
 
-    stage('Maven Build'){
-        steps{
-          // sh 'ssh-agent -k'
-          // sh 'eval "$(ssh-agent -s)"'
-          sh 'exec ssh-agent bash'
-          sh 'ssh-add ~/.ssh/id_rsa'
-        }
-    }
+    // stage('Maven Build'){
+    //     steps{
+          
+    //       // sh 'eval "$(ssh-agent -s)"'
+    //       // sh 'eval "$(ssh-agent -k)"'
+
+    //       sh 'exec ssh-agent bash'
+    //       sh 'ssh-add ~/.ssh/id_rsa'
+    //     }
+    // }
 
 
     //   stage('Docker Build and Push') {
