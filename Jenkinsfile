@@ -16,10 +16,11 @@ pipeline {
 
     stage('Maven Build'){
         steps{
+        sh  'cd ..'
         sh 'ls'
         }
     }
-    
+
 
     //   stage('Docker Build and Push') {
     //   steps {
