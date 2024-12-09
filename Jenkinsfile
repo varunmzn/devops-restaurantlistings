@@ -14,11 +14,11 @@ pipeline {
 
   stages {
 
-    // stage('Maven Build'){
-    //     steps{
-    //     sh 'mvn clean package  -DskipTests'
-    //     }
-    // }
+    stage('Maven Build'){
+        steps{
+        sh 'ls'
+        }
+    }
 
     //   stage('Docker Build and Push') {
     //   steps {
