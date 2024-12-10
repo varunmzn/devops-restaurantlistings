@@ -70,6 +70,7 @@ pipeline {
   post {
         // Clean after build
         always {
+           sh 'ls -a'
            sh 'chmod -R 777 .'
             cleanWs(cleanWhenNotBuilt: false,
                     deleteDirs: true,
