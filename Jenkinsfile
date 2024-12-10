@@ -39,11 +39,11 @@ pipeline {
     //   }
     // } 
 
-     stage('Cleanup Workspace') {
-      steps {
-        deleteDir()
-      }
-    }
+    //  stage('Cleanup Workspace') {
+    //   steps {
+    //     deleteDir()
+    //   }
+    // }
 
 
 
@@ -72,7 +72,7 @@ pipeline {
         always {
             cleanWs(cleanWhenNotBuilt: false,
                     deleteDirs: true,
-                    disableDeferredWipeout: true,
+                    disableDeferredWipeout: false,
                     notFailBuild: true,
                     patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
                                [pattern: '.propsfile', type: 'EXCLUDE']])
