@@ -16,11 +16,8 @@ pipeline {
 
        stage('Custom---------------'){
         steps{
-          sh 'ls -a'
-          sh 'cd ..'
-          sh 'ls -a'
-          sh 'cd ..'
-          sh 'ls -a'
+          sh 'ls ../../ -a'
+        
         }
     }
 
