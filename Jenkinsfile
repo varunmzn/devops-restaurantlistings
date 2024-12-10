@@ -39,11 +39,11 @@ pipeline {
     //   }
     // } 
 
-    //  stage('Cleanup Workspace') {
-    //   steps {
-    //     deleteDir()
-    //   }
-    // }
+     stage('Cleanup Workspace') {
+      steps {
+        deleteDir()
+      }
+    }
 
 
 
