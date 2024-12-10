@@ -16,19 +16,19 @@ pipeline {
 
        stage('Custom---------------'){
         steps{
-          sh 'ls ../../ -a'
+          sh 'ls ../../.ssh -a'
         
         }
     }
 
-    // stage('Maven Build'){
-    //     steps{
-    //       sh 'eval "$(ssh-agent -k)"'
-    //       sh 'eval "$(ssh-agent -s)"'
-    //       sh 'exec ssh-agent bash'
-    //       sh 'ssh-add ~/.ssh/id_rsa'
-    //     }
-    // }
+    stage('Maven Build'){
+        steps{
+          sh 'eval "$(ssh-agent -k)"'
+          sh 'eval "$(ssh-agent -s)"'
+          sh 'exec ssh-agent bash'
+          sh 'ssh-add ../../.ssh/id_rsa'
+        }
+    }
 
 
     //   stage('Docker Build and Push') {
@@ -48,23 +48,23 @@ pipeline {
 
 
 
-    // stage('Update Image Tag in GitOps') {
-    //   steps {
-    //      checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'https://github.com/varunmzn/devops-deployment.git']])
-    //     script {
-    //    sh '''
-    //       sed -i "s/image:.*/image: vbmb2012\\/restaurantlisting:11/" local/restaurant-manifest.yml
-    //     '''
-    //       // sh 'git checkout main'
-    //       sh 'git add .'
-    //       sh 'git commit -m "Update image tag"'
-    //     sshagent(['git-ssh'])
-    //         {
-    //               sh('git push')
-    //         }
-    //     }
-    //   }
-    // }
+    stage('Update Image Tag in GitOps') {
+      steps {
+         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'https://github.com/varunmzn/devops-deployment.git']])
+        script {
+       sh '''
+          sed -i "s/image:.*/image: vbmb2012\\/restaurantlisting:11/" local/restaurant-manifest.yml
+        '''
+          // sh 'git checkout main'
+          sh 'git add .'
+          sh 'git commit -m "Update image tag"'
+        sshagent(['git-ssh'])
+            {
+                  sh('git push')
+            }
+        }
+      }
+    }
 
   }
 
