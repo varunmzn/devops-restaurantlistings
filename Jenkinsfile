@@ -53,7 +53,7 @@ pipeline {
          checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:varunmzn/devops-deployment.git']])
         script {
        sh '''
-          sed -i "s/image:.*/image: vbmb2012\\/restaurantlisting:11/" local/restaurant-manifest.yml
+          sed -i "s/image:.*/image: vbmb2012\\/restaurantlisting:12/" local/restaurant-manifest.yml
         '''
           sh 'git checkout main'
           sh 'git add .'
