@@ -74,10 +74,11 @@ pipeline {
            sh 'chmod -R 777 .'
             cleanWs(cleanWhenNotBuilt: false,
                     deleteDirs: true,
-                    disableDeferredWipeout: false,
+                    disableDeferredWipeout: true,
                     notFailBuild: true,
-                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-                               [pattern: '.propsfile', type: 'EXCLUDE']])
+                    // patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                    //            [pattern: '.propsfile', type: 'EXCLUDE']]
+                    )
         }
     }
 
