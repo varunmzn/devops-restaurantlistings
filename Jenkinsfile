@@ -21,6 +21,13 @@ pipeline {
         }
     }
 
+
+       stage('Maven Build'){
+        steps{
+        sh 'mvn clean package  -DskipTests'
+        }
+    }
+
     // stage('Maven Build'){
     //     steps{
     //       sh 'eval "$(ssh-agent -k)"'
