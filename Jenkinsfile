@@ -31,21 +31,19 @@ pipeline {
     // }
 
 
-    //   stage('Docker Build and Push') {
-    //   steps {
-    //       sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-    //       sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} .'
-    //       sh 'docker push vbmb2012/restaurantlisting:${VERSION}'
-    //   }
-    // } 
+      stage('Docker Build and Push') {
+      steps {
+          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} .'
+          sh 'docker push vbmb2012/restaurantlisting:${VERSION}'
+      }
+    } 
 
-    //  stage('Cleanup Workspace') {
-    //   steps {
-    //     deleteDir()
-    //   }
-    // }
-
-
+     stage('Cleanup Workspace') {
+      steps {
+        deleteDir()
+      }
+    }
 
 
     stage('Update Image Tag in GitOps') {
