@@ -7,7 +7,6 @@ pipeline {
     VERSION = "${env.BUILD_ID}"
 
   }
-
   
   tools {
     maven "maven"
