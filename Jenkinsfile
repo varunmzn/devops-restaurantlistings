@@ -10,6 +10,7 @@ pipeline {
   tools {
     maven "maven"
   }
+  
 
   stages {
     //    stage('Custom---------------'){
