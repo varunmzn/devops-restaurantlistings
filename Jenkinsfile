@@ -14,12 +14,12 @@ pipeline {
 
   stages {
 
-       stage('Custom---------------'){
-        steps{
-          sh 'ls ../../.ssh -a'
+    //    stage('Custom---------------'){
+    //     steps{
+    //       sh 'ls ../../.ssh -a'
         
-        }
-    }
+    //     }
+    // }
 
 
        stage('Maven Build'){
