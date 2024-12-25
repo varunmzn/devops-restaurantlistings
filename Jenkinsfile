@@ -41,7 +41,7 @@ pipeline {
           // sh 'chmod -R 777 /var/run/docker.sock'
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
           sh 'echo $(docker -v)'
-          sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} .'
+          // sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} .'
           // sh 'docker push vbmb2012/restaurantlisting:${VERSION}'
       }
     } 
@@ -53,23 +53,23 @@ pipeline {
     }
 
 
-    // stage('Update Image Tag in GitOps') {
-    //   steps {
-    //      checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:varunmzn/devops-deployment.git']])
-    //     script {
-    //    sh '''
-    //       sed -i "s/image:.*/image: vbmb2012\\/restaurantlisting:${VERSION}/" local/restaurant-manifest.yml
-    //     '''
-    //       sh 'git checkout main'
-    //       sh 'git add .'
-    //       sh 'git commit -m "Update image tag"'
-    //     sshagent(['git-ssh'])
-    //         {
-    //               sh('git push')
-    //         }
-    //     }
-    //   }
-    // }
+    stage('Update Image Tag in GitOps') {
+      steps {
+         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:varunmzn/devops-deployment.git']])
+        script {
+       sh '''
+          sed -i "s/image:.*/image: vbmb2012\\/restaurantlisting:${VERSION}/" local/restaurant-manifest.yml
+        '''
+          sh 'git checkout main'
+          sh 'git add .'
+          sh 'git commit -m "Update image tag"'
+        sshagent(['git-ssh'])
+            {
+                  sh('git push')
+            }
+        }
+      }
+    }
 
   }
   // post {
