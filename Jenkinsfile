@@ -56,7 +56,7 @@ pipeline {
 
     stage('Update Image Tag in GitOps') {
       steps {
-         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'githublogin', url: 'git@github.com:varunmzn/devops-deployment.git']])
+         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:varunmzn/devops-deployment.git']])
         script {
        sh '''
           sed -i "s/image:.*/image: vbmb2012\\/restaurantlisting:1.0.9/" local/restaurant-manifest.yml
