@@ -40,17 +40,17 @@ pipeline {
       steps {
           // sh 'chmod -R 777 /var/run/docker.sock'
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          // sh 'echo $(docker -v)'
+          sh 'echo $(docker -v)'
           sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} .'
           // sh 'docker push vbmb2012/restaurantlisting:${VERSION}'
       }
     } 
 
-    //  stage('Cleanup Workspace') {
-    //   steps {
-    //     deleteDir()
-    //   }
-    // }
+     stage('Cleanup Workspace') {
+      steps {
+        deleteDir()
+      }
+    }
 
 
     // stage('Update Image Tag in GitOps') {
