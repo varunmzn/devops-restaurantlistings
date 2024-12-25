@@ -41,7 +41,7 @@ pipeline {
       steps {
           // sh 'chmod -R 777 /var/run/docker.sock'
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} .'
+          sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} . --no-cache --progress=plain 2>&1 |  echo my name is $(!!)'
           sh 'echo $(docker images)'
       }
     }
