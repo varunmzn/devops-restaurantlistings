@@ -41,7 +41,7 @@ pipeline {
       stage('Docker Build and Push') {
       steps {
           // sh 'chmod -R 777 /var/run/docker.sock'
-          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS --password-stdin'
           sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} .'
           sh 'docker push vbmb2012/restaurantlisting:${VERSION}'
       }
