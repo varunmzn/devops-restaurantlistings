@@ -12,7 +12,6 @@ pipeline {
   }
 
   stages {
-
     //    stage('Custom---------------'){
     //     steps{
     //       sh 'ls ../../.ssh -a'
