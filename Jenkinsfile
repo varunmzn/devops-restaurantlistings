@@ -41,54 +41,56 @@ pipeline {
           sh 'chmod -R 777 /var/run/docker.sock'
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 //           sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} . --no-cache --progress=plain 2>&1 | tee build.log'
+            sh 'ls -a'
             dir('./dockerfile') {
+               sh 'ls -a'
                sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} .'
              }
-          sh 'ls -a'
+      
           sh 'echo $(docker images)'
       }
     }
 
-     stage('Cleanup Workspace') {
-      steps {
-        deleteDir()
-      }
-    }
+    //  stage('Cleanup Workspace') {
+    //   steps {
+    //     deleteDir()
+    //   }
+    // }
 
 
-    stage('Update Image Tag in GitOps') {
-      steps {
-         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:varunmzn/devops-deployment.git']])
-        script {
-       sh '''
-          sed -i "s/image:.*/image: vbmb2012\\/restaurantlisting:${VERSION}/" local/restaurant-manifest.yml
-        '''
-          sh 'git checkout main'
-          sh 'git add .'
-          sh 'git commit -m "Update image tag"'
-        sshagent(['git-ssh'])
-            {
-                  sh('git push')
-            }
-        }
-      }
-    }
+    // stage('Update Image Tag in GitOps') {
+    //   steps {
+    //      checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:varunmzn/devops-deployment.git']])
+    //     script {
+    //    sh '''
+    //       sed -i "s/image:.*/image: vbmb2012\\/restaurantlisting:${VERSION}/" local/restaurant-manifest.yml
+    //     '''
+    //       sh 'git checkout main'
+    //       sh 'git add .'
+    //       sh 'git commit -m "Update image tag"'
+    //     sshagent(['git-ssh'])
+    //         {
+    //               sh('git push')
+    //         }
+    //     }
+    //   }
+    // }
 
   }
-  post {
-        // Clean after build
-        always {
-           // sh 'ls -a'
-           sh 'chmod -R 777 .'
-            cleanWs(cleanWhenNotBuilt: false,
-                    deleteDirs: true,
-                    disableDeferredWipeout: true,
-                    notFailBuild: true,
-                    // patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-                    //            [pattern: '.propsfile', type: 'EXCLUDE']]
-                    )
-        }
-    }
+  // post {
+  //       // Clean after build
+  //       always {
+  //          // sh 'ls -a'
+  //          sh 'chmod -R 777 .'
+  //           cleanWs(cleanWhenNotBuilt: false,
+  //                   deleteDirs: true,
+  //                   disableDeferredWipeout: true,
+  //                   notFailBuild: true,
+  //                   // patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+  //                   //            [pattern: '.propsfile', type: 'EXCLUDE']]
+  //                   )
+  //       }
+  //   }
 
 }
 
