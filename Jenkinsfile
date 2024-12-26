@@ -41,9 +41,9 @@ pipeline {
           sh 'chmod -R 777 /var/run/docker.sock'
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 //           sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} . --no-cache --progress=plain 2>&1 | tee build.log'
-          sh 'cd ./dockerfile'
+          sh 'cd dockerfile'
           sh 'ls -a'
-          sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} .   --no-cache --progress=plain 2>&1 | tee build.log'
+          sh 'docker build -t vbmb2012/restaurantlisting:${VERSION} . --no-cache --progress=plain 2>&1 | tee build.log'
           sh 'echo $(docker images)'
       }
     }
@@ -77,7 +77,7 @@ pipeline {
   post {
         // Clean after build
         always {
-           sh 'ls -a'
+           // sh 'ls -a'
            sh 'chmod -R 777 .'
             cleanWs(cleanWhenNotBuilt: false,
                     deleteDirs: true,
