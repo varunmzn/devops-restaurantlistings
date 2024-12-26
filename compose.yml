@@ -1,0 +1,4 @@
+services:
+  web:
+    build: .
+    image: vbmb2012/restaurantlisting:104
